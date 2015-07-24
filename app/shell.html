@@ -1,0 +1,103 @@
+<div>
+  <nav class="top-bar" data-topbar="">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#">
+            Splendor
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+    </ul>
+
+
+  <section class="top-bar-section">
+      <ul class="right">
+        <li class="divider"></li>
+        <li class="has-dropdown not-click">
+          <a>Games</a>
+          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">Main Item 1</a></li>
+            <li class="has-dropdown not-click">
+              <a href="#" class="">New</a>
+              <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">New Public Game</a></li>
+                <li><label>Public</label></li>
+                <li><a href="#">2 Player Game</a></li>
+                <li><a href="#">3 Player Game</a></li>
+                <li><a href="#">4 Player Game</a></li>
+                <li><label>Private</label></li>
+                <li><a href="#">2 Player Game</a></li>
+                <li><a href="#">3 Player Game</a></li>
+                <li><a href="#">4 Player Game</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown not-click">
+              <a href="#" class="">Find</a>
+              <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">New Public Game</a></li>
+                <li><a href="#">2 Player Game</a></li>
+                <li><a href="#">3 Player Game</a></li>
+                <li><a href="#">4 Player Game</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown not-click">
+              <a href="#" class="">Continue</a>
+              <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">New Public Game</a></li>
+                <li><a href="#">Example 1</a></li>
+                <li><a href="#">Example 2</a></li>
+                <li><a href="#">Example 3</a></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li><label>Misc</label></li>
+            <li><a href="#">Instructions</a></li>
+            <li><a href="#">About</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Buy Splendor</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="has-dropdown not-click">
+          <a href="#instruments">Players</a>
+          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">Main Item 2</a></li>
+            <li><a href="#">Leaderboards</a></li>
+            <li><a href="#/instruments">View All</a></li>
+            <li><a href="#/instruments/new">Find Player</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="">
+          <a href="#" data-bind="click: login, visible: !signedIn">Login</a>
+        </li>
+        <li class="divider"></li>
+        <li class="">
+          <a href="#" data-bind="click: signUp, visible: !signedIn">Sign Up</a>
+        </li>
+      </ul>
+    </section>
+    </nav>
+
+    <div id="login-modal" style="display:none;">
+    </div>
+
+    <div id="signUp-modal" style="display:none;">
+    </div>
+
+
+ <!-- <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+   <ul class="nav" data-bind="foreach: router.navigationModel">
+    <li data-bind="css: { active: isActive }">
+     <a data-bind="attr: { href: hash }, html: title"></a>
+    </li>
+   </ul>
+   <div class="loader pull-right" data-bind="css: { active: router.isNavigating }">
+     <i class="icon-spinner icon-2x icon-spin"></i>
+   </div>
+  </div>
+ </div> -->
+
+
+
+ <div class="container-fluid page-host" data-bind="router: {}"></div>
+</div>
