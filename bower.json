@@ -1,0 +1,25 @@
+{
+  "name": "bb",
+  "version": "1.0.0",
+  "homepage": "https://github.com/miketalley/bb",
+  "authors": [
+    "Mike Talley <miketalley@hotmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.19",
+    "knockout": "~3.3.0",
+    "durandal": "~2.1.0",
+    "foundation": "~5.5.2",
+    "moment": "~2.10.3",
+    "lodash": "~3.10.0"
+  }
+}
