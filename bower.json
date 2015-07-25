@@ -21,6 +21,8 @@
     "foundation": "~5.5.2",
     "moment": "~2.10.3",
     "lodash": "~3.10.0",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "knockout.punches": "~0.5.1",
+    "d3": "~3.5.6"
   }
 }

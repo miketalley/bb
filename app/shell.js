@@ -7,16 +7,10 @@ define(['plugins/router'], function(router){
 
     self.activate = function(){
       self.router.map([
-        { route: '', title:'Home', moduleId: 'shellContent', nav: true, hash: '#home' },
-        { route:'instruments', title:'Instruments', moduleId:'sections/instruments/all', nav: true },
-        { route: 'instruments/new',     title:'New Instrument',   moduleId:'sections/instruments/new',     nav: true },
-        { route:'sessions', title:'Sessions', moduleId:'sections/sessions/all', nav: true },
-        { route:'sessions/new', title:'New Sessions', moduleId:'sections/sessions/new', nav: true },
-        { route:'musicians', title:'Musicians', moduleId:'sections/musicians/all', nav: true },
-        { route: 'musicians/new',     title:'New Musician',   moduleId: 'sections/musicians/new',     nav: true }
-
-
-      ]).buildNavigationModel();
+        { route: '', title:'Home', moduleId: 'views/index', nav: true, hash: '#home' }
+      ])
+      .buildNavigationModel()
+      .mapUnknownRoutes('views/index');
 
       return self.router.activate();
     };

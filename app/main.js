@@ -2,6 +2,7 @@ var bowerPath = '../bower_components';
 
 requirejs.config({
   paths: {
+      'text': bowerPath + '/requirejs-text/text',
       'durandal': bowerPath + '/durandal/js',
       'plugins' : bowerPath + '/durandal/js/plugins',
       'transitions' : bowerPath + '/durandal/js/transitions',
