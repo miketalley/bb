@@ -9,7 +9,8 @@ requirejs.config({
       'knockout': bowerPath + '/knockout/dist/knockout',
       'knockout.punches': bowerPath + '/knockout.punches/knockout.punches.min',
       'jquery': bowerPath + '/jquery/dist/jquery',
-      'lodash': bowerPath + '/lodash/lodash.min'
+      'lodash': bowerPath + '/lodash/lodash.min',
+      'd3': bowerPath + '/d3/d3.min'
     },
     shim: {
       'knockout.punches': {
