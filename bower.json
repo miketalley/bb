@@ -24,6 +24,7 @@
     "font-awesome": "~4.3.0",
     "knockout.punches": "~0.5.1",
     "d3": "~3.5.6",
-    "firebase": "~2.2.7"
+    "firebase": "~2.2.7",
+    "firebase-simple-login": "~1.6.4"
   }
 }

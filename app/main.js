@@ -17,7 +17,8 @@ requirejs.config({
 		'jquery': bowerPath + '/jquery/dist/jquery',
 		'lodash': bowerPath + '/lodash/lodash.min',
 		'd3': bowerPath + '/d3/d3.min',
-		'firebase': bowerPath + '/firebase/firebase'
+		'firebase': bowerPath + '/firebase/firebase',
+		'firebase-simple-login': bowerPath + '/firebase-simple-login/firebase-simple-login'
 	},
 	shim: {
 		'knockout.punches': {
