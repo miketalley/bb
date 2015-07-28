@@ -5,8 +5,8 @@ requirejs.config({
 	paths: {
 		// Local JS Modules
 		'beerbonder': jsPath + '/beerbonder',
-		'firebaseAPI': jsPath + '/firebase.js',
-		'force': jsPath + '/force.js',
+		'firebaseAPI': jsPath + '/firebase',
+		'force': jsPath + '/force',
 
 		// Bower Dependencies
 		'text': bowerPath + '/requirejs-text/text',
