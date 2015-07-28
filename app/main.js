@@ -4,6 +4,7 @@ var bowerPath = '../bower_components',
 requirejs.config({
 	paths: {
 		// Local JS Modules
+		'beerbonder': jsPath + '/beerbonder',
 		'firebaseAPI': jsPath + '/firebase.js',
 		'force': jsPath + '/force.js',
 

@@ -7,17 +7,14 @@ define(['plugins/router', 'beerbonder'], function(router, beerbonder){
 
     self.activate = function(){
       self.router.map([
-        { route: '', title:'Home', moduleId: 'views/index', nav: true, hash: '#home' }
+        { route: '', title:'Home', moduleId: 'views/index', nav: true, hash: '#home' },
+        { route: 'authentication/login', title:'Login', moduleId: 'views/authentication/login', nav: true }
       ])
       .buildNavigationModel()
       .mapUnknownRoutes('views/index');
 
       return self.router.activate();
     };
-
-    self.login = beerbonder.login;
-    self.newUser = beerbonder.newUser;
-
   }
 
   return Shell;
