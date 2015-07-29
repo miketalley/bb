@@ -1,9 +1,9 @@
-define(['firebase', 'firebase-simple-login'], function(Firebase, FirebaseSimpleLogin){
+define(['firebaseConfig'], function(firebaseConfig){
 
-	function FirebaseAPI(){
+	function Authentication(){
 		var self = this,
-			firebase = new Firebase("https://beerbonder.firebaseio.com/"),
-			firebaseAuthClient = getFireBaseAuthentication();
+			firebase = firebaseConfig.firebase,
+			firebaseAuthClient = firebaseConfig.firebaseAuth;
 
 
 		self.checkLoginStatus = function(){
@@ -52,22 +52,8 @@ define(['firebase', 'firebase-simple-login'], function(Firebase, FirebaseSimpleL
 			}
 		}
 
-		function getFireBaseAuthentication(){
-			return new FirebaseSimpleLogin(firebase, function(error, user) {
-				if (error) {
-					// an error occurred while attempting login
-					console.log(error);
-				} else if (user) {
-					// user authenticated with Firebase
-					console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-				} else {
-					// user is logged out
-				}
-			});
-		}
-
 	}
 
-	return FirebaseAPI;
+	return Authentication;
 
 });

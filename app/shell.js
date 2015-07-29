@@ -1,22 +1,30 @@
-define(['plugins/router', 'beerbonder'], function(router, beerbonder){
+define(['plugins/router', 'beerbonder', 'authentication'], function(router, beerbonder, authentication){
 
-  function Shell(){
-    var self = this;
+	function Shell(){
+		var self = this;
 
-    self.router = router;
+		self.router = router;
 
-    self.activate = function(){
-      self.router.map([
-        { route: '', title:'Home', moduleId: 'views/index', nav: true, hash: '#home' },
-        { route: 'authentication/login', title:'Login', moduleId: 'views/authentication/login', nav: true }
-      ])
-      .buildNavigationModel()
-      .mapUnknownRoutes('views/index');
+		self.activate = function(){
+			checkAuthenticationStatus();
 
-      return self.router.activate();
-    };
-  }
+			self.router.map([
+				{ route: '', title:'Home', moduleId: 'views/index', nav: true, hash: '#home' },
+				{ route: 'authentication/login', title:'Login', moduleId: 'views/authentication/login', nav: true },
+				{ route: 'authentication/new', title:'New User', moduleId: 'views/authentication/new', nav: true }
+				])
+			.buildNavigationModel()
+			.mapUnknownRoutes('views/index');
 
-  return Shell;
+			return self.router.activate();
+		};
+
+		function checkAuthenticationStatus(){
+
+		}
+
+	}
+
+	return Shell;
 
 });
