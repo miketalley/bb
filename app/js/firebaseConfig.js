@@ -4,7 +4,7 @@ define(['firebase', 'firebase-simple-login'], function(){
 		var self = this;
 
 		self.firebase = new Firebase("https://beerbonder.firebaseio.com/");
-		self.firebaseAuth = new FirebaseSimpleLogin(firebase, function(error, user) {
+		self.firebaseAuth = new FirebaseSimpleLogin(self.firebase, function(error, user) {
 			if (error) {
 				// an error occurred while attempting login
 				console.log(error);
@@ -19,5 +19,5 @@ define(['firebase', 'firebase-simple-login'], function(){
 		});
 	}
 
-	return FirebaseConfig();
+	return new FirebaseConfig();
 });

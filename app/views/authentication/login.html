@@ -1,12 +1,7 @@
 <div class="row">
 	<div class="small-12 columns small-centered">
-		User: <input type="text" data-bind="textInput: login">
+		Email: <input type="text" data-bind="textInput: login">
 		Password: <input type="password" data-bind="textInput: password">
-		<select data-bind="
-			options: loginOptions,
-			optionsCaption: 'Select a login method...',
-			value: type
-		"></select>
 		<button data-bind="click: doLogin">Login</button>
 	</div>
 </div>
