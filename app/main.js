@@ -17,6 +17,7 @@ requirejs.config({
 		'knockout': bowerPath + '/knockout/dist/knockout',
 		'knockout.punches': bowerPath + '/knockout.punches/knockout.punches.min',
 		'jquery': bowerPath + '/jquery/dist/jquery',
+		'jquery-cookie': bowerPath + '/jquery-cookie/jquery.cookie',
 		'lodash': bowerPath + '/lodash/lodash.min',
 		'd3': bowerPath + '/d3/d3.min',
 		'firebase': bowerPath + '/firebase/firebase',
@@ -25,6 +26,9 @@ requirejs.config({
 	shim: {
 		'knockout.punches': {
 			deps: ['knockout']
+		},
+		'jquery-cookie': {
+			deps: ['jquery']
 		}
 	}
 });
