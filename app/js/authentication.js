@@ -18,7 +18,7 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 			},
 			// Settings { email, password }
 			login: function(settings){
-				firebase.authWithPassword(settings, handler);
+				firebase.authWithPassword(settings, loginHandler);
 			},
 			tokenAuth: function(){
 				var customToken = authCookie || getAuthCookie();
@@ -30,7 +30,7 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 					    return false;
 					  } else {
 					    console.log("Login Succeeded!", authData);
-					    setCurrentUser(authData);
+					    setupCurrentUserSubscription(authData.uid);
 					    return authData;
 					  }
 					});
@@ -72,6 +72,30 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 			}
 		}
 
+		function createUserHandler(error, data){
+			if(error){
+				console.log("Error:", error);
+			}
+			else{
+				console.log("Success:", data);
+				saveAuthCookie(data);
+				saveUser(data, newUserSettings);
+				setupCurrentUserSubscription(data.uid);
+			}
+		}
+
+		function loginHandler(error, data){
+			if(error){
+				console.log("Error:", error);
+			}
+			else{
+				console.log("Success:", data);
+				saveAuthCookie(data);
+				setupCurrentUserSubscription(data.uid);
+			}
+		}
+
+
 		function saveAuthCookie(authData){
 			authCookie = authData.token;
 
@@ -82,30 +106,15 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 			return authCookie || $.cookie("beerBonderAuthToken");
 		}
 
-		function setCurrentUser(authData){
-			var userId = authData.uid,
-				currentUser = user(userId);
-
-			currentUser.on('value', function(userData){
-				self.currentUser(userData);
+		function setupCurrentUserSubscription(id){
+			user(id).on('value', function(userData){
+				self.currentUser(userData.val());
 			});
 		}
 
 		function saveUser(authData, userData){
 			delete userData.password;
 			users.child(authData.uid).set(userData);
-		}
-
-		function createUserHandler(error, data){
-			if(error){
-				console.log("Error:", error);
-			}
-			else{
-				console.log("Success:", data);
-				saveAuthCookie(data);
-				saveUser(data, newUserSettings);
-				setCurrentUser(data);
-			}
 		}
 
 		// function facebookLogin(){

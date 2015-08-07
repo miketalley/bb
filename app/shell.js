@@ -23,6 +23,9 @@ define(['plugins/router', 'beerbonder', 'authentication'], function(router, beer
 			var user = authentication.methods.tokenAuth();
 		}
 
+		self.currentUser = authentication.currentUser;
+		self.logout = authentication.methods.logout;
+
 	}
 
 	return Shell;
