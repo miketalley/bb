@@ -26,6 +26,7 @@
     "d3": "~3.5.6",
     "firebase": "~2.2.7",
     "firebase-simple-login": "~1.6.4",
-    "jquery-cookie": "~1.4.1"
+    "jquery-cookie": "~1.4.1",
+    "knockout-validation": "~2.0.3"
   }
 }

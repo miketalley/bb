@@ -21,7 +21,6 @@ define(['plugins/router', 'beerbonder', 'authentication'], function(router, beer
 
 		function checkAuthenticationStatus(){
 			var user = authentication.methods.tokenAuth();
-			console.log(111222, user);
 		}
 
 	}

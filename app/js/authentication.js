@@ -3,32 +3,38 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 	function Authentication(settings){
 		var self = this,
 			firebase = firebaseConfig.firebase,
-			firebaseAuthClient = firebaseConfig.firebaseAuth;
+			firebaseAuthClient = firebaseConfig.firebaseAuth,
+			users = firebaseConfig.users,
+			user = firebaseConfig.user,
+			authCookie, newUserSettings;
 
 		self.currentUser = ko.observable();
 
 		self.methods = {
 			// Settings { email, password }
 			createUser: function(settings){
-				firebase.createUser(settings, handler);
+				newUserSettings = settings;
+				firebase.createUser(settings, createUserHandler);
 			},
 			// Settings { email, password }
 			login: function(settings){
 				firebase.authWithPassword(settings, handler);
 			},
 			tokenAuth: function(){
-				var customToken = getAuthCookie();
+				var customToken = authCookie || getAuthCookie();
 
-				firebase.authWithCustomToken(customToken, function(error, authData) {
-				  if (error) {
-				    console.log("Login Failed!", error);
-				    return false;
-				  } else {
-				    console.log("Login Succeeded!", authData);
-				    setCurrentUser(authData);
-				    return authData;
-				  }
-				});
+				if(customToken){
+					firebase.authWithCustomToken(customToken, function(error, authData) {
+					  if (error) {
+					    console.log("Login Failed!", error);
+					    return false;
+					  } else {
+					    console.log("Login Succeeded!", authData);
+					    setCurrentUser(authData);
+					    return authData;
+					  }
+					});
+				}
 			},
 			logout: function(){
 				self.currentUser(null);
@@ -48,6 +54,11 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 			// Settings { email, password }
 			deleteUser: function(settings){
 				firebase.removeUser(settings, handler);
+			},
+			getUser: function(userId){
+				user(userId).on('value', function(userData){
+					debugger;
+				});
 			}
 		};
 
@@ -62,13 +73,39 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 		}
 
 		function saveAuthCookie(authData){
-			var tokenValue = authData.token;
+			authCookie = authData.token;
 
-			$.cookie("beerBonderAuthToken", tokenValue, { expires : 30 });
+			$.cookie("beerBonderAuthToken", authCookie, { expires : 30 });
 		}
 
 		function getAuthCookie(){
-			return $.cookie("beerBonderAuthToken");
+			return authCookie || $.cookie("beerBonderAuthToken");
+		}
+
+		function setCurrentUser(authData){
+			var userId = authData.uid,
+				currentUser = user(userId);
+
+			currentUser.on('value', function(userData){
+				self.currentUser(userData);
+			});
+		}
+
+		function saveUser(authData, userData){
+			delete userData.password;
+			users.child(authData.uid).set(userData);
+		}
+
+		function createUserHandler(error, data){
+			if(error){
+				console.log("Error:", error);
+			}
+			else{
+				console.log("Success:", data);
+				saveAuthCookie(data);
+				saveUser(data, newUserSettings);
+				setCurrentUser(data);
+			}
 		}
 
 		// function facebookLogin(){

@@ -1,7 +1,13 @@
 <div class="row">
 	<div class="small-12 columns small-centered">
-		User: <input type="text" data-bind="textInput: email">
-		Password: <input type="password" data-bind="textInput: password">
-		<button data-bind="click: createUser">Create User</button>
+		<form data-bind="submit: createUser">
+			Username: <input type="text" data-bind="textInput: username">
+			Email: <input type="text" data-bind="textInput: email">
+			Password: <input type="password" data-bind="textInput: password">
+			Confirm Password: <input type="password" data-bind="textInput: confirmPassword">
+			Untappd Username(optional): <input type="text" data-bind="textInput: untappdId">
+			Location(optional): <input type="text" data-bind="textInput: location">
+			<button data-bind="click: createUser">Create User</button>
+		</form>
 	</div>
 </div>

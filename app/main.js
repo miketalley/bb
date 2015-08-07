@@ -16,6 +16,7 @@ requirejs.config({
 		'transitions' : bowerPath + '/durandal/js/transitions',
 		'knockout': bowerPath + '/knockout/dist/knockout',
 		'knockout.punches': bowerPath + '/knockout.punches/knockout.punches.min',
+		'knockout-validation': bowerPath + '/knockout-validation/dist/knockout.validation.min',
 		'jquery': bowerPath + '/jquery/dist/jquery',
 		'jquery-cookie': bowerPath + '/jquery-cookie/jquery.cookie',
 		'lodash': bowerPath + '/lodash/lodash.min',
@@ -41,6 +42,7 @@ define(function (require) {
 	window.ko = ko;
 
 	require('knockout.punches');
+	require('knockout-validation');
 	ko.punches.enableAll();
 	ko.punches.attributeInterpolationMarkup.enable();
 
