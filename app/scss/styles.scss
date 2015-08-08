@@ -1,11 +1,23 @@
 #applicationHost{
 	
-	input[type="text"]{
+	input[type="text"]:not(.prefix){
 		border-radius: 5px;
 	}
 
-	button{
+	input[type="text"].prefix{
+		border-radius: 5px 0px 0px 5px;
+	}
+
+	button:not(.postfix){
 		border-radius: 4px;
+	}
+
+	button.postfix{
+		border-radius: 0px 4px 4px 0px;
+	}
+
+	button.right, button.left {
+		margin-left: 5px;
 	}
 
 	.raleway{
@@ -13,7 +25,27 @@
 	}
 
 	.main-panel{
-		margin-top: 5%;
+		position: relative;
+		top: 10%;
+		// margin-top: 5%;
 		background: rgba(0, 0, 0, 0.8);
+	}
+
+	.logo{
+		.beer{
+			color: white;
+		}
+
+		.bonder{
+			color: white;
+			position: relative;
+
+		}
+	}
+
+	.landing-page {
+		background: rgba(0, 0, 0, 0.65);
+		height: 100%;
+		width: 100%;
 	}
 }

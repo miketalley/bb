@@ -1,10 +1,22 @@
-<div>
-	<div class="small-4 columns panel main-panel center">
+<div class="landing-page">
+	<div class="small-4 columns panel main-panel small-centered">
+		<h2 class="raleway logo">
+			<span class="beer">Beer</span>
+			<span class="bonder">Bonder</span>
+		</h2>
 		<form data-bind="submit: findBeer">
-			<input type="text" data-bind="textInput: searchText" />
-			<div class="button-container right">
-				<button class="small primary" data-bind="click: findBeer">Find Beer</button>
+			<div class="row collapse">
+				<div class="small-9 columns">
+					<input class="prefix" type="text" data-bind="textInput: searchText" />
+				</div>
+				<div class="small-3 columns">
+					<button class="primary postfix" data-bind="click: findBeer">Find Beer</button>
+				</div>
 			</div>
 		</form>
+		<div class="button-container">
+			<button class="tiny secondary" data-bind="click: findBeer">Login</button>
+			<button class="tiny secondary" data-bind="click: findBeer">Sign Up</button>
+		</div>
 	</div>
 </div>
