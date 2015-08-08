@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
+	gutil = require('gulp-util'),
 	sass = require('gulp-sass'),
-	uglify = require('gulp-uglify'),
+	minify = require('gulp-minify-css'),
 	concat = require('gulp-concat'),
 	paths = {
 		sass: ['./app/scss/**/*.scss']
@@ -10,8 +11,8 @@ var gulp = require('gulp'),
 gulp.task('compile-sass', function(){
 	gulp.src(paths.sass)
 		.pipe(sass().on('error', sass.logError))
-		// .pipe(uglify())
-		// .pipe(concat('style.css'))
+		.pipe(minify().on('error', gutil.log))
+		.pipe(concat('style.css').on('error', gutil.log))
 		.pipe(gulp.dest('./app/css/'));
 });
 
