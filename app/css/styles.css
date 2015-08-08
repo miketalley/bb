@@ -1,0 +1,12 @@
+#applicationHost input[type="text"] {
+  border-radius: 5px; }
+
+#applicationHost button {
+  border-radius: 4px; }
+
+#applicationHost .raleway {
+  font-family: 'Raleway', sans-serif; }
+
+#applicationHost .main-panel {
+  margin-top: 5%;
+  background: rgba(0, 0, 0, 0.8); }

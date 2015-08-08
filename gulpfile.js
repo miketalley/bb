@@ -3,16 +3,16 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
 	paths = {
-		sass: ['scss/**/*.scss']
+		sass: ['./app/scss/**/*.scss']
 	};
 
 
 gulp.task('compile-sass', function(){
 	gulp.src(paths.sass)
 		.pipe(sass().on('error', sass.logError))
-		.pipe(uglify())
-		.pipe(concat('style.min.css'))
-		.pipe(gulp.dest('css/'));
+		// .pipe(uglify())
+		// .pipe(concat('style.css'))
+		.pipe(gulp.dest('./app/css/'));
 });
 
 // Watch task to compile scss when updated
