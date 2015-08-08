@@ -1,3 +1,10 @@
 <div>
-	Hello thur!
+	<div class="small-4 columns panel main-panel center">
+		<form data-bind="submit: findBeer">
+			<input type="text" data-bind="textInput: searchText" />
+			<div class="button-container right">
+				<button class="small primary" data-bind="click: findBeer">Find Beer</button>
+			</div>
+		</form>
+	</div>
 </div>
