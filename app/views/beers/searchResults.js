@@ -17,6 +17,24 @@ define(['beers'], function(beers){
 		self.searchAgain = function(){
 			self.findBeer(self.searchTerm());
 		};
+
+		self.linkBeer = function(beer){
+			var linkBeer1 = self.linkBeer1(),
+				linkBeer2 = self.linkBeer2();
+
+			if(!linkBeer1 && !linkBeer2){
+				self.linkBeer1(beer);
+			}
+			else if(linkBeer1 && !linkBeer2){
+				self.linkBeer2(beer);
+			}
+			else if(linkBeer2 && !linkBeer1){
+				self.linkBeer1(beer);
+			}
+			else if(linkBeer1 && linkBeer2){
+				// Already got both!?
+			}
+		};
 	}
 
 	BeerSearchResults.prototype.findBeer = function(beer){

@@ -1,74 +1,69 @@
 <div>
-	<nav class="top-bar" data-topbar="">
-		<ul class="title-area">
-			<!-- Title Area -->
-			<li class="name">
-				<h1 class='raleway'>
-					<a href="#">
-						Beer Bonder
-					</a>
-				</h1>
-			</li>
-			<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-		</ul>
-
-
-		<section class="top-bar-section">
-			<ul class="right">
-				<li class="divider"></li>
-				<li class="has-dropdown not-click">
-					<a>Bonds</a>
-					<ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">Main Item 1</a></li>
-						<li class="">
-							<a href="#" class="">New</a>
-						</li>
-						<li class="">
-							<a href="#" class="">Search</a>
-						</li>
-					</ul>
+	<!-- <div class="fixed"> -->
+		<nav class="top-bar" data-topbar="">
+			<ul class="title-area">
+				<!-- Title Area -->
+				<li class="name">
+					<h1 class='raleway'>
+						<a href="#">
+							Beer Bonder
+						</a>
+					</h1>
 				</li>
-				<li class="divider"></li>
-				<li class="has-dropdown not-click">
-					<a href="#instruments">Beers</a>
-					<ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">Main Item 2</a></li>
-						<li><a href="#">All</a></li>
-						<li><a href="#/instruments">Search</a></li>
-					</ul>
-				</li>
-				<li class="divider"></li>
-				<!-- ko ifnot: currentUser -->
-				<li class="">
-					<a href="#/authentication/login">Login</a>
-				</li>
-				<li class="divider"></li>
-				<li class="">
-					<a href="#/authentication/new">Sign Up</a>
-				</li>
-				<!-- /ko -->
-				
-				<!-- ko if: currentUser -->
-				<li class="has-dropdown not-click">
-					<a href="#/authentication/profile" data-bind="text: currentUser().username"></a>
-					<ul class="dropdown">
-						<li class="title back js-generated">
-							<h5><a href="javascript:void(0)">Back</a></h5>
-						</li>
-						<li class="parent-link show-for-small">
-							<a class="parent-link js-generated" href="#"></a>
-						</li>
-						<li><a href="#" data-bind="click: logout">Logout</a></li>
-					</ul>
-				</li>
-				<!-- /ko -->
+				<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 			</ul>
-		</section>
-	</nav>
 
-	<div id="login-modal" style="display:none;">
-	</div>
 
-	<div id="signUp-modal" style="display:none;">
-	</div>
+			<section class="top-bar-section">
+				<ul class="right">
+					<li class="divider"></li>
+					<li class="has-dropdown not-click">
+						<a>Bonds</a>
+						<ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">Main Item 1</a></li>
+							<li class="">
+								<a href="#" class="">New</a>
+							</li>
+							<li class="">
+								<a href="#" class="">Search</a>
+							</li>
+						</ul>
+					</li>
+					<li class="divider"></li>
+					<li class="has-dropdown not-click">
+						<a href="#instruments">Beers</a>
+						<ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link show-for-small"><a class="parent-link js-generated" href="#">Main Item 2</a></li>
+							<li><a href="#">All</a></li>
+							<li><a href="#/instruments">Search</a></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
+					<!-- ko ifnot: currentUser -->
+					<li class="">
+						<a href="#/authentication/login">Login</a>
+					</li>
+					<li class="divider"></li>
+					<li class="">
+						<a href="#/authentication/new">Sign Up</a>
+					</li>
+					<!-- /ko -->
+					
+					<!-- ko if: currentUser -->
+					<li class="has-dropdown not-click">
+						<a href="#/authentication/profile" data-bind="text: currentUser().username"></a>
+						<ul class="dropdown">
+							<li class="title back js-generated">
+								<h5><a href="javascript:void(0)">Back</a></h5>
+							</li>
+							<li class="parent-link show-for-small">
+								<a class="parent-link js-generated" href="#"></a>
+							</li>
+							<li><a href="#" data-bind="click: logout">Logout</a></li>
+						</ul>
+					</li>
+					<!-- /ko -->
+				</ul>
+			</section>
+		</nav>
 
 
  <!-- <div class="navbar navbar-fixed-top">
@@ -85,6 +80,8 @@
 </div> -->
 
 
+	<!-- </div> -->
+	
+	<div class="container-fluid page-host" data-bind="router: {}"></div>
 
-<div class="container-fluid page-host" data-bind="router: {}"></div>
 </div>
