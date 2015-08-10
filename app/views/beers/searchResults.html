@@ -1,7 +1,20 @@
 <div class="small-12 medium-8 columns small-centered">
+	<div class="small-12 columns search-results-search-input">
+		<form data-bind="submit: searchAgain">
+			<div class="row collapse">
+				<div class="small-6 medium-8 columns">
+					<input class="prefix" type="text" data-bind="textInput: searchTerm" />
+				</div>
+				<div class="small-6 medium-4 columns">
+					<button class="primary postfix" data-bind="click: searchAgain">Search Again</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
 	<div class="small-12 columns">
 		<h4 class="raleway">
-			Search Results for: <span data-bind="text: searchTerm"></span>
+			Search Results for: <span data-bind="text: resultTerm"></span>
 		</h4>
 	</div>
 

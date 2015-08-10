@@ -6,6 +6,7 @@
 
 	input[type="text"].prefix{
 		border-radius: 5px 0px 0px 5px;
+		text-align: left;
 	}
 
 	button:not(.postfix){
@@ -63,6 +64,10 @@
 	.beer-search-result-container {
 		margin-bottom: 10px;
 		// border: 1px solid #e6e6e6;
+	}
+
+	.search-results-search-input {
+		margin-top: 10px;
 	}
 
 	.landing-page {

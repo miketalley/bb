@@ -4,21 +4,30 @@ define(['beers'], function(beers){
 		var self = this;
 
 		self.searchTerm = ko.observable();
+		self.resultTerm = ko.observable();
 		self.results = ko.observable();
+
+		self.searchAgain = function(){
+			self.findBeer(self.searchTerm());
+		};
 	}
 
-	BeerSearchResults.prototype.activate = function(settings, params){
+	BeerSearchResults.prototype.findBeer = function(beer){
 		var self = this;
 
-		this.searchTerm(params.searchTerm);
-		
-		beers.find(params.searchTerm)
+		beers.find(beer)
 		.done(function(search){
 			if(search){
+				self.resultTerm(beer);
 				self.results(search.response.beers.items);
 			}
 		});
 	};
+
+	BeerSearchResults.prototype.activate = function(settings, params){
+		this.findBeer(params.searchTerm);
+	};
+
 
 	return BeerSearchResults;
 
