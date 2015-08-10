@@ -6,7 +6,7 @@ define([], function(){
 		self.searchText = ko.observable();
 
 		self.findBeer = function(){
-
+			
 		};
 
 	}

@@ -1,6 +1,6 @@
 define(['d3'], function(d3){
 
-	function forceChart(settings){
+	function ForceChartWidget(settings){
 		var width = setting.width || window.innerWidth,
 			height = settings.height || window.innerHeight,
 			selector = settings.selector || "body",
@@ -124,6 +124,6 @@ define(['d3'], function(d3){
 
 	}
 
-	return forceChart;
+	return ForceChartWidget;
 
 });
