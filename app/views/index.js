@@ -4,13 +4,13 @@ define(['plugins/router'], function(router){
 		var self = this,
 			beerSearchUrl = '/beers/searchResults';
 
-		self.searchText = ko.observable();
+		self.searchTerm = ko.observable();
 
 		self.findBeer = function(){
-			var searchText = self.searchText();
+			var searchTerm = self.searchTerm();
 			
-			if(searchText){
-				router.navigate(beerSearchUrl + '?searchText=' + searchText);
+			if(searchTerm){
+				router.navigate(beerSearchUrl + '?searchTerm=' + searchTerm);
 			}
 		};
 

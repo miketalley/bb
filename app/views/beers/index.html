@@ -1,0 +1,16 @@
+<div class='container'>
+  <div class='row'>
+    <h1></h1>
+
+    <% @beers.sort { |a,b| a.name.downcase <=> b.name.downcase }.each do |beer| %>
+      <div class='row beer-each ng-animate ng-enter'>
+        <div class='col-md-2'>
+          <img src='<%= beer.icon_url %>'>
+        </div>
+        <div class='col-md-10'>
+          <%= link_to beer.name, beer, class: 'game-name' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
