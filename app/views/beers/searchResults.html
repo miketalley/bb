@@ -12,45 +12,69 @@
 		</form>
 	</div>
 
-	<div class="small-12 columns">
-		<h4 class="raleway">
-			Search Results for: <span data-bind="text: resultTerm"></span>
-		</h4>
-	</div>
+	<!-- ko if: showLinkDetails -->
 
-	<!-- ko foreach: results -->
-		<div data-bind="template: { name: 'beerResult', data: $data }"></div>
+	<!-- /ko -->
+
+	<!-- ko ifnot: showLinkDetails -->
+		<div class="small-12 columns">
+			<h4 class="raleway">
+				Search Results for: <span data-bind="text: resultTerm"></span>
+			</h4>
+		</div>
+
+		<!-- ko foreach: results -->
+			<div data-bind="template: { name: 'beerResult', data: $data }"></div>
+		<!-- /ko -->
 	<!-- /ko -->
 
 	<script type="text/html" id="beerResult">
 		<div class="small-12 columns beer-search-result-container">
-			<div class="small-12 medium-2 columns">
-				<img class="beer-label-small" data-bind="attr: { src: $data.beer.beer_label }">
+			
+			<div data-bind="template: { name: 'beerData', data: $data }"></div>
+
+			<div class="small-12 medium-3 columns">
+				<div class="row">
+					<div class="small-12 columns">
+						View Beer Bonds
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						Link This Beer
+					</div>
+				</div>
 			</div>
-			<div class="small-12 medium-10 columns">
-				<div class="row">
-					<div class="small-12 columns">
-						<h5 class="lora bold">
-							{{ $data.beer.beer_name }}
-						</h5>
-					</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="beerData">
+		<div class="small-12 medium-2 columns">
+			<img class="beer-label-small" data-bind="attr: { src: $data.beer.beer_label }">
+		</div>
+		<div class="small-12 medium-7 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h5 class="lora bold">
+						{{ $data.beer.beer_name }}
+					</h5>
 				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<a data-bind="attr: { href: $data.brewery.contact.url }">
-							{{ $data.brewery.brewery_name }}
-						</a>
-					</div>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					<a data-bind="attr: { href: $data.brewery.contact.url }">
+						{{ $data.brewery.brewery_name }}
+					</a>
 				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						{{ $data.beer.beer_style }}
-					</div>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					{{ $data.beer.beer_style }}
 				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						{{ $data.beer.beer_abv }}% ABV
-					</div>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					{{ $data.beer.beer_abv }}% ABV
 				</div>
 			</div>
 		</div>

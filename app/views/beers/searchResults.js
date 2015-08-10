@@ -6,6 +6,13 @@ define(['beers'], function(beers){
 		self.searchTerm = ko.observable();
 		self.resultTerm = ko.observable();
 		self.results = ko.observable();
+		self.selectedBeer = ko.observable();
+		self.linkBeer1 = ko.observable();
+		self.linkBeer2 = ko.observable();
+
+		self.showLinkDetails = ko.pureComputed(function(){
+			return !!(self.linkBeer1() && self.linkBeer2());
+		});
 
 		self.searchAgain = function(){
 			self.findBeer(self.searchTerm());
@@ -25,7 +32,15 @@ define(['beers'], function(beers){
 	};
 
 	BeerSearchResults.prototype.activate = function(settings, params){
-		this.findBeer(params.searchTerm);
+		var beerId = params.bid,
+			searchTerm = params.searchTerm;
+
+		if(beerId){
+			this.beerId(beerId);
+		}
+		else if(searchTerm){
+			this.findBeer(searchTerm);
+		}
 	};
 
 
