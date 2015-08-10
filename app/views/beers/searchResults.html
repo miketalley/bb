@@ -17,12 +17,9 @@
 			<div class="small-12 medium-10 columns">
 				<div class="row">
 					<div class="small-12 columns">
-						{{ $data.beer.beer_name }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						{{ $data.beer.beer_style }}
+						<h5 class="lora bold">
+							{{ $data.beer.beer_name }}
+						</h5>
 					</div>
 				</div>
 				<div class="row">
@@ -30,6 +27,11 @@
 						<a data-bind="attr: { href: $data.brewery.contact.url }">
 							{{ $data.brewery.brewery_name }}
 						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{{ $data.beer.beer_style }}
 					</div>
 				</div>
 				<div class="row">
