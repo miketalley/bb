@@ -6,6 +6,8 @@ define(['firebaseConfig'], function(firebaseConfig){
 		self.reasons = firebaseConfig.reasons;
 	}
 
+	// TODO -- Add users to reasons
+
 	Reasons.prototype.update = function(bondId, reason){
 		var newReason = {
 				description: reason,
