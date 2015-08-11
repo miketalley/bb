@@ -10,7 +10,7 @@ define(['knockout', 'forceChart'], function(ko, ForceChart){
 					nodes = data.nodes,
 					links = data.links;
 
-				new ForceChart({
+				viewModel.forceChart = new ForceChart({
 					width: $ele.width(),
 					height: $ele.height(),
 					selector: element,
@@ -19,20 +19,13 @@ define(['knockout', 'forceChart'], function(ko, ForceChart){
 				});
 			},
 			update: function(element, valueAccessor, allBindings, viewModel, bindingContext){
-				debugger;
 				var $ele = $(element),
 					valAc = valueAccessor(),
 					data = valAc.data(),
 					nodes = data.nodes,
 					links = data.links;
 
-				new ForceChart({
-					width: $ele.width(),
-					height: $ele.height(),
-					selector: element,
-					nodeSource: nodes,
-					linkSource: links
-				});
+				viewModel.forceChart.update(null, nodes, links);
 			}
 		};
 

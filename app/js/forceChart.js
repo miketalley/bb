@@ -45,13 +45,8 @@ define(['d3'], function(d3){
 		// .defer(d3.json, linkJsonUrl)
 		// .await(update);
 
-		if(nodeSource && nodeSource.length && linkSource && linkSource.length){
-			console.log('Binding ForceChart:', nodeSource, linkSource);
-			update(null, nodeSource, linkSource);
-		}
 
-
-	  	function update(error, nodes, links){
+	  	self.update = function(error, nodes, links){
 		  	console.log('Nodes: ' + nodes.length);
 		  	console.log('Links: ' + links.length);
 		  	var newLinks = [];
@@ -127,6 +122,11 @@ define(['d3'], function(d3){
 				.attr("weight", function(d) { return d.weight; });
 				texts.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 			});
+		};
+
+		if(nodeSource && nodeSource.length && linkSource && linkSource.length){
+			console.log('Binding ForceChart:', nodeSource, linkSource);
+			self.update(null, nodeSource, linkSource);
 		}
 
 	}
