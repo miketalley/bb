@@ -1,4 +1,4 @@
-define(['beers'], function(beers){
+define(['beers', 'bonds'], function(beers, bonds){
 
 	function BeerSearchResults(){
 		var self = this;
@@ -10,6 +10,7 @@ define(['beers'], function(beers){
 		self.selectedBeer = ko.observable();
 		self.linkBeer1 = ko.observable();
 		self.linkBeer2 = ko.observable();
+		self.reason = ko.observable();
 		self.isLoading = ko.observable();
 
 		self.showLinkDetails = ko.pureComputed(function(){
@@ -32,6 +33,16 @@ define(['beers'], function(beers){
 				self.results.remove(beer);
 				self.linkBeer2(beer);
 			}
+		};
+
+		self.makeLink = function(){
+			var beer1 = self.linkBeer1(),
+				beer2 = self.linkBeer2(),
+				reason = self.reason();
+
+			beers.save(beer1);
+			beers.save(beer2);
+			bonds.create(beer1, beer2, reason);
 		};
 	}
 

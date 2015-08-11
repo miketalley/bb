@@ -1,6 +1,6 @@
 <div class="small-12 medium-8 columns small-centered">
 	<!-- ko if: linkBeer1() || linkBeer2() -->
-	<div class="small-12 columns display-flex">
+	<div class="small-12 columns display-flex link-beer-container">
 
 		<div class="small-12 medium-5 columns">
 			<!-- ko if: linkBeer1() -->
@@ -38,7 +38,13 @@
 	<!-- /ko -->
 
 	<!-- ko if: showLinkDetails -->
-
+	<div class="small-12 columns">
+		<form data-bind="submit: makeLink">
+			<label>Link Reason</label>
+			<input type="text" data-bind="textInput: reason">
+			<button data-bind="click: makeLink">Create New Link</button>
+		</form>
+	</div>
 	<!-- /ko -->
 
 	<!-- ko ifnot: showLinkDetails -->
