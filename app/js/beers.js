@@ -4,6 +4,7 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 		var self = this;
 
 		self.beers = firebaseConfig.beers;
+		self.bonds = firebaseConfig.bonds;
 	}
 
 	Beers.prototype.find = function(searchTerm, options){
@@ -19,8 +20,34 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 	    });
 	};
 
-	Beers.prototype.save = function(beer){
-		this.beers.child(beer.beer.bid).set(beer);
+	Beers.prototype.save = function(beer, bondId){
+		var id = beer.beer.bid,
+			beerRef = this.beers.child(id),
+			beerData = beerRef.once('value', function(data){
+				return data;
+			});
+
+		if(beerData){
+			var bondRef = beerData.bonds.child('bondId'),
+				bondFound = bondRef.once('value', function(data){
+					return data;
+				});
+
+			if(bondFound){
+				bondRef.update({
+					strength: bondFound.strength + 1 || 1;
+				});
+			}
+			else {
+				// If existing beer, just add the new bond
+				beerRef.child('bonds').push(bondId);
+			}
+		}
+		else{
+			// If new beer, set up the bonds array
+			beer.bonds = [bondId];
+			this.beers.child(id).set(beer);
+		}
 	};
 
 	Beers.prototype.get = function(beerId){
