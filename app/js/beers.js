@@ -28,20 +28,15 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 			});
 
 		if(beerData){
-			var bondRef = beerData.bonds.child('bondId'),
-				bondFound = bondRef.once('value', function(data){
-					return data;
-				});
+			beerRef.transaction(function(savedBeer){
+				var bondFound = savedBeer.bonds.indexOf(bondId);
 
-			if(bondFound){
-				bondRef.update({
-					strength: bondFound.strength + 1 || 1;
-				});
-			}
-			else {
-				// If existing beer, just add the new bond
-				beerRef.child('bonds').push(bondId);
-			}
+				if(!bondFound){
+					savedBeer.bonds.push(bondId);
+				}
+
+				return savedBeer;
+			});
 		}
 		else{
 			// If new beer, set up the bonds array

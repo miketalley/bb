@@ -51,35 +51,15 @@ define(['firebaseConfig', 'lodash', 'beers'], function(firebaseConfig, _, beers)
  			if(bondData){
  				incrementBondStrength(bondId);
  			}
-
 			else {
-				// If existing beer, just add the new bond
 				bondRef.child(bondId).set({
 	 				source_id: beer1.beer.bid,
 	 				target_id: beer2.beer.bid,
 	 				strength: 1
  				});
 			}
+			
 			updateBondReasons(bondId, reason);
-
- 		// 	bond = {
- 		// 		source_id: beer1.beer.bid,
- 		// 		target_id: beer2.beer.bid
- 		// 	}
-
-			// 	bondFound = bondRef.once('value', function(data){
-			// 		return data;
-			// 	});
-
-			// if(bondFound){
-			// 	bondRef.update({
-			// 		strength: bondFound.strength + 1 || 1
-			// 	});
-			// }
-
- 		this.bonds.push(bond, function(){
- 			// router.navigate()
- 		});
  	};
 
  	Bonds.prototype.children = function(beer){
