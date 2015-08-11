@@ -6,9 +6,11 @@ define(['beers'], function(beers){
 		self.searchTerm = ko.observable();
 		self.resultTerm = ko.observable();
 		self.results = ko.observable();
+		self.noResultsFound = ko.observable();
 		self.selectedBeer = ko.observable();
 		self.linkBeer1 = ko.observable();
 		self.linkBeer2 = ko.observable();
+		self.isLoading = ko.observable();
 
 		self.showLinkDetails = ko.pureComputed(function(){
 			return !!(self.linkBeer1() && self.linkBeer2());
@@ -40,12 +42,21 @@ define(['beers'], function(beers){
 	BeerSearchResults.prototype.findBeer = function(beer){
 		var self = this;
 
+		self.noResultsFound(false);
+		self.isLoading(true);
+
 		beers.find(beer)
 		.done(function(search){
-			if(search){
-				self.resultTerm(beer);
+			self.resultTerm(beer);
+			
+			if(search && search.response.beers.count){
 				self.results(search.response.beers.items);
 			}
+			else if(search && !search.response.beers.count){
+				self.noResultsFound(true);
+			}
+
+			self.isLoading(false);
 		});
 	};
 

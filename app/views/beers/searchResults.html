@@ -22,6 +22,7 @@
 	</div>
 	<!-- /ko -->
 
+	<!-- ko if: !linkBeer1() || !linkBeer2() -->
 	<div class="small-12 columns search-results-search-input">
 		<form data-bind="submit: searchAgain">
 			<div class="row collapse">
@@ -34,6 +35,7 @@
 			</div>
 		</form>
 	</div>
+	<!-- /ko -->
 
 	<!-- ko if: showLinkDetails -->
 
@@ -42,12 +44,18 @@
 	<!-- ko ifnot: showLinkDetails -->
 		<div class="small-12 columns">
 			<h4 class="raleway">
-				Search Results for: <span data-bind="text: resultTerm"></span>
+				Showing Results for: <span data-bind="text: resultTerm"></span>
 			</h4>
 		</div>
 
 		<!-- ko foreach: results -->
 			<div data-bind="template: { name: 'beerResult', data: $data }"></div>
+		<!-- /ko -->
+
+		<!-- ko if: noResultsFound -->
+			<div class="small-12 columns">
+				No Results Found
+			</div>
 		<!-- /ko -->
 	<!-- /ko -->
 
