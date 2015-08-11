@@ -4,12 +4,14 @@ var bowerPath = '../bower_components',
 requirejs.config({
 	paths: {
 		// Local JS Modules
+		'knockout-bindings': jsPath + '/bindings',
 		'beerbonder': jsPath + '/beerbonder',
 		'authentication': jsPath + '/authentication',
 		'firebaseConfig': jsPath + '/firebaseConfig',
 		'beers': jsPath + '/beers',
 		'bonds': jsPath + '/bonds',
 		'reasons': jsPath + '/reasons',
+		'forceChart': jsPath + '/forceChart',
 
 		// Bower Dependencies
 		'text': bowerPath + '/requirejs-text/text',
@@ -45,6 +47,7 @@ define(function (require) {
 
 	require('knockout.punches');
 	require('knockout-validation');
+	require('knockout-bindings');
 	ko.punches.enableAll();
 	ko.punches.attributeInterpolationMarkup.enable();
 

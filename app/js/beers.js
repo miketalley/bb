@@ -45,16 +45,12 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 		}
 	};
 
-	Beers.prototype.get = function(beerId){
-		this.beers.child(beerId).once('value', function(data){
-			return data;
-		});
+	Beers.prototype.get = function(beerId, callback){
+		this.beers.child(beerId).once('value', callback);
 	};
 
-	Beers.prototype.getAll = function(){
-		this.beers.once('value', function(data){
-			return data;
-		});
+	Beers.prototype.getAll = function(callback){
+		this.beers.on('value', callback);
 	};
 
 	return new Beers();

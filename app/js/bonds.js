@@ -52,6 +52,10 @@ define(['firebaseConfig', 'lodash', 'beers', 'reasons'], function(firebaseConfig
  		// });
  	};
 
+ 	Bonds.prototype.getAll = function(callback){
+ 		this.bonds.on('value', callback);
+ 	};
+
  	return new Bonds();
 
 });

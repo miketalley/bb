@@ -1,7 +1,8 @@
 define(['d3'], function(d3){
 
-	function ForceChartWidget(settings){
-		var width = setting.width || window.innerWidth,
+	function ForceChart(settings){
+		var self = this,
+			width = settings.width || window.innerWidth,
 			height = settings.height || window.innerHeight,
 			selector = settings.selector || "body",
 			linkClass = settings.linkClass || ".link",
@@ -11,8 +12,8 @@ define(['d3'], function(d3){
 			charge = settings.charge || -2500,
 			gravity = settings.gravity || 0.3,
 			fixed = settings.fixed || true,
-			nodeJsonUrl = "",
-			linkJsonUrl = "",
+			nodeSource = settings.nodeSource,
+			linkSource = settings.linkSource,
 			nodeLinkUrl = "";
 
 	  	// Set Dynamic Force
@@ -39,12 +40,18 @@ define(['d3'], function(d3){
 		}
 
 		// Getting data for nodes and links
-		queue()
-		.defer(d3.json, nodeJsonUrl)
-		.defer(d3.json, linkJsonUrl)
-		.await(update);
+		// queue()
+		// .defer(d3.json, nodeJsonUrl)
+		// .defer(d3.json, linkJsonUrl)
+		// .await(update);
 
-	  	function update(error, nodes, links) {
+		if(nodeSource && nodeSource.length && linkSource && linkSource.length){
+			console.log('Binding ForceChart:', nodeSource, linkSource);
+			update(null, nodeSource, linkSource);
+		}
+
+
+	  	function update(error, nodes, links){
 		  	console.log('Nodes: ' + nodes.length);
 		  	console.log('Links: ' + links.length);
 		  	var newLinks = [];
@@ -124,6 +131,6 @@ define(['d3'], function(d3){
 
 	}
 
-	return ForceChartWidget;
+	return ForceChart;
 
 });
