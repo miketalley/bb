@@ -1,4 +1,4 @@
-define(['knockout', 'forceChart'], function(ko, ForceChart){
+define(['knockout', 'forceChart', 'lodash'], function(ko, ForceChart, _){
 
 	(function(){
 
@@ -23,9 +23,10 @@ define(['knockout', 'forceChart'], function(ko, ForceChart){
 					valAc = valueAccessor(),
 					data = valAc.data(),
 					nodes = data.nodes,
-					links = data.links;
+					links = data.links,
+					forceChart = viewModel.forceChart;
 
-				viewModel.forceChart.update(null, nodes, links);
+				_.debounce(forceChart.update.bind(null, null, nodes, links), 50);
 			}
 		};
 

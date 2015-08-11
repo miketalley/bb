@@ -47,6 +47,7 @@ define(['d3'], function(d3){
 
 
 	  	self.update = function(error, nodes, links){
+	  		debugger;
 		  	console.log('Nodes: ' + nodes.length);
 		  	console.log('Links: ' + links.length);
 		  	var newLinks = [];
@@ -69,7 +70,6 @@ define(['d3'], function(d3){
 
 			for(var i = 0; i < nodes.length; i++){
 				nodes[i].weight = numberOfNodeLinks(nodes[i]).length;
-				console.log(nodes[i].name + ': ' + nodes[i].weight);
 			}
 
 			force.nodes(nodes).links(links).start();
@@ -124,10 +124,10 @@ define(['d3'], function(d3){
 			});
 		};
 
-		if(nodeSource && nodeSource.length && linkSource && linkSource.length){
-			console.log('Binding ForceChart:', nodeSource, linkSource);
-			self.update(null, nodeSource, linkSource);
-		}
+		// if(nodeSource && nodeSource.length && linkSource && linkSource.length){
+		// 	console.log('Binding ForceChart:', nodeSource, linkSource);
+		// 	self.update(null, nodeSource, linkSource);
+		// }
 
 	}
 
