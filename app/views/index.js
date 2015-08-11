@@ -11,6 +11,9 @@ define(['knockout', 'plugins/router', 'beers', 'bonds'], function(ko, router, be
 			var beers = self.beers(),
 				bonds = self.bonds();
 
+			beers = convertToArray(beers);
+			bonds = convertToArray(bonds);
+
 			return {
 				nodes: beers,
 				links: bonds
@@ -38,6 +41,17 @@ define(['knockout', 'plugins/router', 'beers', 'bonds'], function(ko, router, be
 				router.navigate(beerSearchUrl + '?searchTerm=' + searchTerm);
 			}
 		};
+
+		function convertToArray(object){
+			var keys = Object.keys(object),
+				array = [];
+
+			keys.forEach(function(key){
+				array.push(object[key]);
+			});
+
+			return array;
+		}
 
 	}
 
