@@ -19,6 +19,7 @@ define(['knockout', 'forceChart'], function(ko, ForceChart){
 				});
 			},
 			update: function(element, valueAccessor, allBindings, viewModel, bindingContext){
+				debugger;
 				var $ele = $(element),
 					valAc = valueAccessor(),
 					data = valAc.data(),

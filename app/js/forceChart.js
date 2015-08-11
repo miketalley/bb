@@ -62,7 +62,7 @@ define(['d3'], function(d3){
 				targetNode = nodes.filter(function(n) { return n.id === e.target; })[0];
 
 				newLinks.push({source: sourceNode, target: targetNode});
-				console.log('Pushing newLinks: ' + sourceNode + ' : ' + targetNode);
+				console.log('Pushing newLinks: ', sourceNode, targetNode);
 			});
 
 			links = newLinks;
@@ -88,7 +88,7 @@ define(['d3'], function(d3){
 			.attr("font-family", "sans-serif")
 			.attr("font-size", "10px")
 			.attr('class', 'text')
-			.text(function(d) { return d.name; });
+			.text(function(d) { return d.beer.beer_name; });
 
 			// Draw Lines for Links
 			var edges = svg.selectAll("line")
@@ -96,7 +96,7 @@ define(['d3'], function(d3){
 			.enter()
 			.append("line")
 			.style("stroke", "#fff")
-			.style("stroke-width", 3);
+			.style("stroke-width", 2);
 
 			// Draw Nodes
 			node = svg.selectAll(".node")
@@ -108,8 +108,8 @@ define(['d3'], function(d3){
 
 			// Append Images to Nodes
 			node.append('image')
-			.attr("xlink:href", function(d){ return d.icon_url; })
-			.attr('ondblclick', function(d){ return "openLink(" + nodeLinkUrl + d.id + "')"; })
+			.attr("xlink:href", function(d){ return d.beer.beer_label; })
+			// .attr('ondblclick', function(d){ return "openLink(" + nodeLinkUrl + d.id + "')"; })
 			.attr("x", 0)
 			.attr("y", 5)
 			.attr("width", 50)
