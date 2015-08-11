@@ -1,46 +1,17 @@
-define(['firebaseConfig', 'lodash', 'beers'], function(firebaseConfig, _, beers){
+define(['firebaseConfig', 'lodash', 'beers', 'reasons'], function(firebaseConfig, _, beers, reasons){
 
  	function Bonds(){
  		var self = this;
 
  		self.bonds = firebaseConfig.bonds;
  		self.beers = firebaseConfig.beers;
-
- 		function incrementBondStrength(bondId){
- 			bonds.child(bondId).transaction(function(currentValue){
- 				return currentValue + 1;
- 			});
- 		}
-
- 		function updateBondReasons(bondId, reason){
- 			reasons.child(bondId).transaction(function(storedReasons){
- 				var existingReason = storedReasons.filter(function(storedReason){
- 					return storedReason.description.toLowerCase() === reason.toLowerCase();
- 				})[0];
- 				
- 				if(existingReason){
- 					var i = storedReasons.indexOf(existingReason);
-
- 					storedReasons[i].strength += 1;
- 				}
- 				else{
- 					storedReasons.push({
- 						description: reason,
- 						strength: 1
- 					});
-
- 				}
-
-				return storedReasons;
-			});
- 		}
  	}
 
  	Bonds.prototype.create = function(beer1, beer2, reason){
  		var beer1Id = beer1.beer.bid,
  			beer2Id = beer2.beer.bid,
  			bondId = Math.min(beer1Id, beer2Id).toString() + '_' + Math.max(beer1Id, beer2Id),
- 			bondRef = bonds.child('bondId'),
+ 			bondRef = this.bonds,
  			bondData = bondRef.once('value', function(data){
  				return data;
  			});
@@ -49,7 +20,7 @@ define(['firebaseConfig', 'lodash', 'beers'], function(firebaseConfig, _, beers)
  			beers.save(beer2, bondId);
 
  			if(bondData){
- 				incrementBondStrength(bondId);
+ 				this.incrementBondStrength(bondId);
  			}
 			else {
 				bondRef.child(bondId).set({
@@ -58,9 +29,15 @@ define(['firebaseConfig', 'lodash', 'beers'], function(firebaseConfig, _, beers)
 	 				strength: 1
  				});
 			}
-			
-			updateBondReasons(bondId, reason);
+
+			reasons.update(bondId, reason);
  	};
+
+ 	Bonds.prototype.incrementBondStrength = function(bondId){
+		bonds.child(bondId).transaction(function(currentValue){
+			return currentValue + 1;
+		});
+	};
 
  	Bonds.prototype.children = function(beer){
  		var children = {
@@ -69,9 +46,6 @@ define(['firebaseConfig', 'lodash', 'beers'], function(firebaseConfig, _, beers)
  		};
 
  		this.priorBeer = this.priorBeer || beer;
-
-
- 		
 
  		// return _.uniq(bonds, function(bond){
  		// 	return bond.source_id === beer.beer.bid || bond.target_id === beer.beer.bid;

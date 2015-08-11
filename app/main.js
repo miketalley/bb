@@ -9,6 +9,7 @@ requirejs.config({
 		'firebaseConfig': jsPath + '/firebaseConfig',
 		'beers': jsPath + '/beers',
 		'bonds': jsPath + '/bonds',
+		'reasons': jsPath + '/reasons',
 
 		// Bower Dependencies
 		'text': bowerPath + '/requirejs-text/text',

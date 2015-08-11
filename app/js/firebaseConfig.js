@@ -7,6 +7,7 @@ define(['firebase', 'firebase-simple-login'], function(){
 		self.users = self.firebase.child('users');
 		self.beers = self.firebase.child('beers');
 		self.bonds = self.firebase.child('bonds');
+		self.reasons = self.firebase.child('reasons');
 
 		self.user = function(userId){
 			return self.users.child(userId);
