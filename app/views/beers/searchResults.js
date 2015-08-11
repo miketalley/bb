@@ -5,7 +5,7 @@ define(['beers'], function(beers){
 
 		self.searchTerm = ko.observable();
 		self.resultTerm = ko.observable();
-		self.results = ko.observable();
+		self.results = ko.observableArray();
 		self.noResultsFound = ko.observable();
 		self.selectedBeer = ko.observable();
 		self.linkBeer1 = ko.observable();
@@ -24,17 +24,13 @@ define(['beers'], function(beers){
 			var linkBeer1 = self.linkBeer1(),
 				linkBeer2 = self.linkBeer2();
 
-			if(!linkBeer1 && !linkBeer2){
+			if((!linkBeer1 && !linkBeer2) || (linkBeer2 && !linkBeer1)){
+				self.results.remove(beer);
 				self.linkBeer1(beer);
 			}
 			else if(linkBeer1 && !linkBeer2){
+				self.results.remove(beer);
 				self.linkBeer2(beer);
-			}
-			else if(linkBeer2 && !linkBeer1){
-				self.linkBeer1(beer);
-			}
-			else if(linkBeer1 && linkBeer2){
-				// Already got both!?
 			}
 		};
 	}
@@ -44,11 +40,10 @@ define(['beers'], function(beers){
 
 		self.noResultsFound(false);
 		self.isLoading(true);
+		self.resultTerm(beer);
 
 		beers.find(beer)
-		.done(function(search){
-			self.resultTerm(beer);
-			
+		.done(function(search){	
 			if(search && search.response.beers.count){
 				self.results(search.response.beers.items);
 			}
