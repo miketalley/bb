@@ -14,7 +14,8 @@ define(['d3'], function(d3){
 			fixed = settings.fixed || true,
 			nodeSource = settings.nodeSource,
 			linkSource = settings.linkSource,
-			nodeLinkUrl = "";
+			nodeLinkUrl = "",
+			svg;
 
 	  	// Set Dynamic Force
 	  	var force = d3.layout.force()
@@ -23,12 +24,23 @@ define(['d3'], function(d3){
 		.charge([charge])
 		.gravity(gravity);
 
-		var svg = d3.select(selector).append("svg")
-		.attr("width", width)
-		.attr("height", height);
+		function generateSvg(){
+			svg = d3.select(selector).append("svg")
+			.attr("width", width)
+			.attr("height", height);
+		}
 
-		var link = svg.selectAll(linkClass),
-		node = svg.selectAll(nodeClass);
+		self.updateSvg = function(error, nodes, links){
+			if(nodes && nodes.length && links && links.length){
+				console.log('Binding ForceChart:', nodes, links);
+				update(null, nodes, links);
+			}
+
+			d3.select(selector).transition();
+		};
+
+		// var link = svg.selectAll(linkClass),
+		// node = svg.selectAll(nodeClass);
 
 		// Fix position of nodes once moved
 		var drag = force.drag().on("dragstart", dragstart);
@@ -39,6 +51,8 @@ define(['d3'], function(d3){
 			}
 		}
 
+		generateSvg();
+
 		// Getting data for nodes and links
 		// queue()
 		// .defer(d3.json, nodeJsonUrl)
@@ -46,7 +60,7 @@ define(['d3'], function(d3){
 		// .await(update);
 
 
-	  	self.update = function(error, nodes, links){
+	  	function update(error, nodes, links){
 	  		debugger;
 		  	console.log('Nodes: ' + nodes.length);
 		  	console.log('Links: ' + links.length);
@@ -111,23 +125,18 @@ define(['d3'], function(d3){
 			.attr("height", 50);
 
 			// Turn on Force
-			force.on("tick", function() {
+			force.on("tick", function(){
 				edges
-				.attr("x1", function(d) { return d.source.x + 20; })
-				.attr("y1", function(d) { return d.source.y + 20; })
-				.attr("x2", function(d) { return d.target.x + 20; })
-				.attr("y2", function(d) { return d.target.y + 20; });
+				.attr("x1", function(d){ return d.source.x + 20; })
+				.attr("y1", function(d){ return d.source.y + 20; })
+				.attr("x2", function(d){ return d.target.x + 20; })
+				.attr("y2", function(d){ return d.target.y + 20; });
 				node
-				.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-				.attr("weight", function(d) { return d.weight; });
-				texts.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+				.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; })
+				.attr("weight", function(d){ return d.weight; });
+				texts.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; });
 			});
-		};
-
-		// if(nodeSource && nodeSource.length && linkSource && linkSource.length){
-		// 	console.log('Binding ForceChart:', nodeSource, linkSource);
-		// 	self.update(null, nodeSource, linkSource);
-		// }
+		}
 
 	}
 

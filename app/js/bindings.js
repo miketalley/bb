@@ -26,7 +26,7 @@ define(['knockout', 'forceChart', 'lodash'], function(ko, ForceChart, _){
 					links = data.links,
 					forceChart = viewModel.forceChart;
 
-				_.debounce(forceChart.update.bind(null, null, nodes, links), 50);
+				_.debounce(forceChart.updateSvg.bind(null, null, nodes, links), 50);
 			}
 		};
 
