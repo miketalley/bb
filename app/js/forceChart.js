@@ -80,7 +80,7 @@ define(['d3'], function(d3){
 						return node.beer.bid === link.target_id; 
 					})[0];
 
-				newLinks.push({source: sourceNode, target: targetNode});
+				newLinks.push({source: sourceNode, target: targetNode, strength: link.strength});
 				console.log('Pushing newLinks: ', sourceNode, targetNode);
 			});
 
@@ -115,6 +115,7 @@ define(['d3'], function(d3){
 			.enter()
 			.append("line")
 			.attr('class', linkClass)
+			.style("stroke-width", function(link){ return link.strength });
 			// .style("stroke", "#000")
 			// .style("stroke-width", 4);
 
@@ -139,16 +140,25 @@ define(['d3'], function(d3){
 			force.on("tick", function(){
 				edges
 				.attr("x1", function(d){ 
-					console.log(d.source.beer.beer_name, d.target.beer.beer_name); 
 					return d.source.x + 20; 
 				})
-				.attr("y1", function(d){ return d.source.y + 20; })
-				.attr("x2", function(d){ return d.target.x + 20; })
-				.attr("y2", function(d){ return d.target.y + 20; });
+				.attr("y1", function(d){ 
+					return d.source.y + 20; 
+				})
+				.attr("x2", function(d){ 
+					return d.target.x + 20; 
+				})
+				.attr("y2", function(d){ 
+					return d.target.y + 20; 
+				});
 				
 				node
-				.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; })
-				.attr("weight", function(d){ return d.weight; });
+				.attr("transform", function(d){ 
+					return "translate(" + d.x + "," + d.y + ")"; 
+				})
+				.attr("weight", function(d){ 
+					return d.weight; 
+				});
 				
 				texts.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; });
 			});
