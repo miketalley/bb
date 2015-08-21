@@ -4,6 +4,7 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 		var self = this;
 
 		self.beers = firebaseConfig.beers;
+		self.bonds = firebaseConfig.bonds;
 	}
 
 	Beers.prototype.find = function(searchTerm, options){
@@ -19,20 +20,37 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 	    });
 	};
 
-	Beers.prototype.save = function(beer){
-		this.beers.child(beer.beer.bid).set(beer);
+	Beers.prototype.save = function(beer, bondId){
+		var id = beer.beer.bid,
+			beerRef = this.beers.child(id),
+			beerData = beerRef.once('value', function(data){
+				return data;
+			});
+
+		if(beerData){
+			beerRef.transaction(function(savedBeer){
+				var bondFound = savedBeer.bonds.indexOf(bondId);
+
+				if(!bondFound){
+					savedBeer.bonds.push(bondId);
+				}
+
+				return savedBeer;
+			});
+		}
+		else{
+			// If new beer, set up the bonds array
+			beer.bonds = [bondId];
+			this.beers.child(id).set(beer);
+		}
 	};
 
-	Beers.prototype.get = function(beerId){
-		this.beers.child(beerId).once('value', function(data){
-			return data;
-		});
+	Beers.prototype.get = function(beerId, callback){
+		this.beers.child(beerId).once('value', callback);
 	};
 
-	Beers.prototype.getAll = function(){
-		this.beers.once('value', function(data){
-			return data;
-		});
+	Beers.prototype.getAll = function(callback){
+		this.beers.on('value', callback);
 	};
 
 	Beers.prototype.getChildren = function(beerId){

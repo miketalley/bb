@@ -29,7 +29,6 @@ define(['knockout', 'jquery', 'jquery-cookie', 'firebaseConfig'], function(ko, $
 					    console.log("Login Failed!", error);
 					    return false;
 					  } else {
-					    console.log("Login Succeeded!", authData);
 					    setupCurrentUserSubscription(authData.uid);
 					    return authData;
 					  }

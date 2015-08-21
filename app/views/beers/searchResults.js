@@ -40,8 +40,6 @@ define(['beers', 'bonds'], function(beers, bonds){
 				beer2 = self.linkBeer2(),
 				reason = self.reason();
 
-			beers.save(beer1);
-			beers.save(beer2);
 			bonds.create(beer1, beer2, reason);
 		};
 	}
