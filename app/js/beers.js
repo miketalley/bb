@@ -35,6 +35,10 @@ define(['jquery', 'knockout', 'firebaseConfig'], function($, ko, firebaseConfig)
 		});
 	};
 
+	Beers.prototype.getChildren = function(beerId){
+		
+	};
+
 	return new Beers();
 
 });
