@@ -6,7 +6,7 @@ define(['knockout', 'forceChart', 'lodash'], function(ko, ForceChart, _){
 			init: function(element, valueAccessor, allBindings, viewModel, bindingContext){
 				var $ele = $(element),
 					valAc = valueAccessor(),
-					data = valAc.data(),
+					data = valAc.data,
 					nodes = data.nodes,
 					links = data.links;
 
@@ -14,19 +14,20 @@ define(['knockout', 'forceChart', 'lodash'], function(ko, ForceChart, _){
 					width: $ele.width(),
 					height: $ele.height(),
 					selector: element,
-					nodeSource: nodes,
-					linkSource: links
+					data: data
 				});
 			},
 			update: function(element, valueAccessor, allBindings, viewModel, bindingContext){
-				var $ele = $(element),
-					valAc = valueAccessor(),
-					data = valAc.data(),
-					nodes = data.nodes,
-					links = data.links,
-					forceChart = viewModel.forceChart;
+				// var $ele = $(element),
+				// 	valAc = valueAccessor(),
+				// 	data = valAc.data(),
+				// 	nodes = data.nodes,
+				// 	links = data.links,
+				// 	forceChart = viewModel.forceChart;
 
-				_.debounce(forceChart.updateSvg.bind(null, null, nodes, links), 50);
+				// // _.debounce(viewModel.forceChart.updateSvg.bind(null, null, nodes, links), 50);
+
+				// viewModel.forceChart.updateSvg(null, nodes, links);
 			}
 		};
 

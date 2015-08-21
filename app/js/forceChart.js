@@ -5,8 +5,9 @@ define(['d3'], function(d3){
 			width = settings.width || window.innerWidth,
 			height = settings.height || window.innerHeight,
 			selector = settings.selector || "body",
-			linkClass = settings.linkClass || ".link",
-			nodeClass = settings.nodeClass || ".node",
+			linkClass = settings.linkClass || "link",
+			nodeClass = settings.nodeClass || "node",
+			textClass = settings.textClass || "text",
 			color = d3.scale.category20(),
 			linkDistance = settings.linkDistance || 50,
 			charge = settings.charge || -2500,
@@ -14,6 +15,7 @@ define(['d3'], function(d3){
 			fixed = settings.fixed || true,
 			nodeSource = settings.nodeSource,
 			linkSource = settings.linkSource,
+			data = settings.data,
 			nodeLinkUrl = "",
 			svg;
 
@@ -29,6 +31,10 @@ define(['d3'], function(d3){
 			.attr("width", width)
 			.attr("height", height);
 		}
+
+		data.subscribe(function(newData){
+			self.updateSvg(null, newData.nodes, newData.links);
+		});
 
 		self.updateSvg = function(error, nodes, links){
 			if(nodes && nodes.length && links && links.length){
@@ -61,15 +67,18 @@ define(['d3'], function(d3){
 
 
 	  	function update(error, nodes, links){
-	  		debugger;
 		  	console.log('Nodes: ' + nodes.length);
 		  	console.log('Links: ' + links.length);
 		  	var newLinks = [];
 
 			// Replace references of IDs
-			links.forEach(function(e) {
-				var sourceNode = nodes.filter(function(n) { return n.id === e.source; })[0],
-				targetNode = nodes.filter(function(n) { return n.id === e.target; })[0];
+			links.forEach(function(link) {
+				var sourceNode = nodes.filter(function(node){ 
+						return node.beer.bid === link.source_id; 
+					})[0],
+					targetNode = nodes.filter(function(node){ 
+						return node.beer.bid === link.target_id; 
+					})[0];
 
 				newLinks.push({source: sourceNode, target: targetNode});
 				console.log('Pushing newLinks: ', sourceNode, targetNode);
@@ -79,7 +88,8 @@ define(['d3'], function(d3){
 
 			var numberOfNodeLinks = function(node){
 				return links.filter(function(p){
-					return (p.source.id === node.id || p.target.id === node.id); });
+					return (p.source.id === node.id || p.target.id === node.id); 
+				});
 			};
 
 			for(var i = 0; i < nodes.length; i++){
@@ -93,10 +103,10 @@ define(['d3'], function(d3){
 			.data(nodes)
 			.enter()
 			.append("text")
-			.attr("fill", "white")
-			.attr("font-family", "sans-serif")
-			.attr("font-size", "10px")
-			.attr('class', 'text')
+			// .attr("fill", "black")
+			// .attr("font-family", "sans-serif")
+			// .attr("font-size", "10px")
+			.attr('class', textClass)
 			.text(function(d) { return d.beer.beer_name; });
 
 			// Draw Lines for Links
@@ -104,15 +114,16 @@ define(['d3'], function(d3){
 			.data(links)
 			.enter()
 			.append("line")
-			.style("stroke", "#fff")
-			.style("stroke-width", 2);
+			.attr('class', linkClass)
+			// .style("stroke", "#000")
+			// .style("stroke-width", 4);
 
 			// Draw Nodes
-			node = svg.selectAll(".node")
+			node = svg.selectAll("node")
 			.data(nodes)
 			.enter()
 			.append('g')
-			.attr('class', 'node')
+			.attr('class', nodeClass)
 			.call(drag);
 
 			// Append Images to Nodes
@@ -127,13 +138,18 @@ define(['d3'], function(d3){
 			// Turn on Force
 			force.on("tick", function(){
 				edges
-				.attr("x1", function(d){ return d.source.x + 20; })
+				.attr("x1", function(d){ 
+					console.log(d.source.beer.beer_name, d.target.beer.beer_name); 
+					return d.source.x + 20; 
+				})
 				.attr("y1", function(d){ return d.source.y + 20; })
 				.attr("x2", function(d){ return d.target.x + 20; })
 				.attr("y2", function(d){ return d.target.y + 20; });
+				
 				node
 				.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; })
 				.attr("weight", function(d){ return d.weight; });
+				
 				texts.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; });
 			});
 		}

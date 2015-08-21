@@ -24,13 +24,15 @@ define(['knockout', 'plugins/router', 'beers', 'bonds'], function(ko, router, be
 			data: self.data
 		};
 
-		beers.getAll(function(data){
-			self.beers(data.val());
-		});
-
-		bonds.getAll(function(data){
-			self.bonds(data.val());
-		});
+		self.activate = function(){
+			beers.getAll(function(data){
+				self.beers(data.val());
+			});
+			
+			bonds.getAll(function(data){
+				self.bonds(data.val());
+			});
+		};
 
 		self.searchTerm = ko.observable();
 

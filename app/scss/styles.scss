@@ -34,16 +34,19 @@
     	margin-left: 50%;
 	}
 
-	/* =================
-		Google Fonts 
-	==================*/
+	.node {
 
-	.raleway{
-		font-family: 'Raleway', sans-serif;
 	}
 
-	.lora{
-		font-family: 'Lora', serif;
+	.text {
+		fill: black;
+		font-family: 'sans-serif';
+		font-size: 8px;
+	}
+
+	.link {
+		stroke: #000000;
+		stroke-width: 2;
 	}
 
 	.bold {
@@ -99,5 +102,17 @@
 		    margin-top: 0;
 		    z-index: -1;
 		}
+	}
+
+	/* =================
+		Google Fonts 
+	==================*/
+
+	.raleway{
+		font-family: 'Raleway', sans-serif;
+	}
+
+	.lora{
+		font-family: 'Lora', serif;
 	}
 }
