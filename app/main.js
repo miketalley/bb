@@ -57,7 +57,12 @@ define(function (require) {
 
 	app.configurePlugins({
 		router: true,
-		dialog: true
+		dialog: true,
+		widget: {
+			kinds: [
+				'chart'
+			]
+		}
 	});
 
 	app.start().then(function() {
