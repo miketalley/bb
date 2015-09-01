@@ -2,10 +2,6 @@ define(['d3'], function(d3){
 
 	function ForceChart(settings){
 		var self = this,
-			width = settings.width || window.innerWidth,
-			height = settings.height || window.innerHeight,
-			className = settings.className || "force-chart",
-			selector = settings.selector || "body",
 			linkClass = settings.linkClass || "link",
 			nodeClass = settings.nodeClass || "node",
 			textClass = settings.textClass || "text",
@@ -13,19 +9,21 @@ define(['d3'], function(d3){
 			linkDistance = settings.linkDistance || 50,
 			charge = settings.charge || -2500,
 			gravity = settings.gravity || 0.3,
-			fixed = settings.fixed || true,
-			nodeSource = settings.nodes,
-			linkSource = settings.links,
-			data = settings.data,
-			nodeLinkUrl = "",
-			svg, link, text, node;
+			fixed = settings.fixed || true;
 
-	  	// Set Dynamic Force
-	  	var force = d3.layout.force()
-			.size([width, height])
-			.linkDistance([linkDistance])
-			.charge([charge])
-			.gravity(gravity);
+		self.settings = settings;
+
+			// width = settings.width || window.innerWidth,
+			// height = settings.height || window.innerHeight,
+			// className = settings.className || "force-chart",
+			// selector = settings.selector || "body",
+			// nodeSource = settings.nodes,
+			// linkSource = settings.links,
+			// data = settings.data,
+			// nodeLinkUrl = "",
+			// svg, link, text, node;
+
+	  	
 
 		function generateSvg(){
 			svg = d3.select(selector).append("svg")
@@ -266,6 +264,19 @@ define(['d3'], function(d3){
 			
 			// Text
 			text.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; });
+		}
+
+		function subscribeToNodes(){
+
+		}
+
+		// Set Dynamic Force
+		function setForce(settings){
+	  		return d3.layout.force()
+				.size([width, height])
+				.linkDistance([linkDistance])
+				.charge([charge])
+				.gravity(gravity);
 		}
 
 	}
