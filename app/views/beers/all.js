@@ -7,30 +7,35 @@ define(['knockout', 'plugins/router', 'beers', 'bonds'], function(ko, router, be
 		self.beers = ko.observableArray();
 		self.bonds = ko.observableArray();
 
-		self.data = ko.pureComputed(function(){
-			var beers = self.beers(),
-				bonds = self.bonds();
+		// self.data = ko.pureComputed(function(){
+		// 	var beers = self.beers(),
+		// 		bonds = self.bonds();
 
-			beers = convertToArray(beers);
-			bonds = convertToArray(bonds);
+		// 	beers = convertToArray(beers);
+		// 	bonds = convertToArray(bonds);
 
-			return {
-				nodes: beers,
-				links: bonds
-			};
-		});
+		// 	return {
+		// 		nodes: beers,
+		// 		links: bonds
+		// 	};
+		// });
 
 		self.forceChartSettings = {
-			data: self.data
+			nodes: self.beers,
+			links: self.bonds
 		};
 
 		self.activate = function(){
 			beers.getAll(function(data){
-				self.beers(data.val());
+				var beersArray = convertToArray(data.val());
+				
+				self.beers(beersArray);
 			});
 			
 			bonds.getAll(function(data){
-				self.bonds(data.val());
+				var bondsArray = convertToArray(data.val());
+				
+				self.bonds(bondsArray);
 			});
 		};
 

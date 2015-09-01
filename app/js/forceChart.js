@@ -14,8 +14,8 @@ define(['d3'], function(d3){
 			charge = settings.charge || -2500,
 			gravity = settings.gravity || 0.3,
 			fixed = settings.fixed || true,
-			nodeSource = settings.nodeSource,
-			linkSource = settings.linkSource,
+			nodeSource = settings.nodes,
+			linkSource = settings.links,
 			data = settings.data,
 			nodeLinkUrl = "",
 			svg, link, text, node;
