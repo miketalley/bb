@@ -22,21 +22,8 @@ define(['d3'], function(d3){
 			// data = settings.data,
 			// nodeLinkUrl = "",
 			// svg, link, text, node;
-
-	  	
-
-		function generateSvg(){
-			svg = d3.select(selector).append("svg")
-			.attr("class", className)
-			.attr("width", width)
-			.attr("height", height);
-
-			// svg.exit().remove();
-		}
-
-		// data.subscribe(function(newData){
-		// 	self.updateSvg(null, newData.nodes, newData.links);
-		// });
+		
+		/* PUBLIC FUNCTIONS */ 
 
 		self.updateSvg = function(error, nodes, links){
 			if(nodes && nodes.length && links && links.length){
@@ -51,26 +38,30 @@ define(['d3'], function(d3){
 			redraw();
 		};
 
-		// var link = svg.selectAll(linkClass),
-		// node = svg.selectAll(nodeClass);
 
-		// Fix position of nodes once moved
-		var drag = force.drag().on("dragstart", dragstart);
-
-		function dragstart(d){
-			if(fixed){
-				d3.select(this).classed("fixed", d.fixed = true);
-			}
-		}
+		/* ACTIVATION */
 
 		generateSvg();
+		
+	  	
 
-		// Getting data for nodes and links
-		// queue()
-		// .defer(d3.json, nodeJsonUrl)
-		// .defer(d3.json, linkJsonUrl)
-		// .await(update);
+	  	/* PRIVATE FUNCTIONS */
 
+		function generateSvg(){
+			svg = d3.select(selector).append("svg")
+			.attr("class", className)
+			.attr("width", width)
+			.attr("height", height);
+
+			// svg.exit().remove();
+		}
+
+		// data.subscribe(function(newData){
+		// 	self.updateSvg(null, newData.nodes, newData.links);
+		// });
+
+		// var link = svg.selectAll(linkClass),
+		// node = svg.selectAll(nodeClass);
 
 	  	function update(error, nodes, links){
 		  	console.log('Nodes: ' + nodes.length);
@@ -159,7 +150,7 @@ define(['d3'], function(d3){
 			          else selected_link = mousedown_link; 
 			          selected_node = null; 
 			          redraw(); 
-			        })
+			        });
 
 			  link.exit().remove();
 
@@ -277,6 +268,15 @@ define(['d3'], function(d3){
 				.linkDistance([linkDistance])
 				.charge([charge])
 				.gravity(gravity);
+		}
+
+		// Fix position of nodes once moved
+		var drag = force.drag().on("dragstart", dragstart);
+
+		function dragstart(d){
+			if(fixed){
+				d3.select(this).classed("fixed", d.fixed = true);
+			}
 		}
 
 	}
